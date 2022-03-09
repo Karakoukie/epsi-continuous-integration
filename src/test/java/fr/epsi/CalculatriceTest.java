@@ -1,6 +1,7 @@
 package fr.epsi;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -15,7 +16,7 @@ public final class CalculatriceTest {
         final double result = calculatrice.add(1d, 2d);
 
         // ALORS le résultat doit être correct
-        assertTrue(result == 3d);
+        assertEquals(3d, result, 0);
     }
 
     @Test
@@ -27,7 +28,7 @@ public final class CalculatriceTest {
         final double result = calculatrice.sub(2d, 1d);
 
         // ALORS le résultat doit être correct
-        assertTrue(result == 1d);
+        assertEquals(1d, result, 0);
     }
 
     @Test
@@ -40,25 +41,23 @@ public final class CalculatriceTest {
             final double result = calculatrice.div(10d, 2d);
 
             // ALORS le résultat doit être correct
-            assertTrue(result == 5d);
+            assertEquals(5d, result, 0);
         } catch(Exception ex) {
-            fail();
+            fail(ex.getMessage());
             ex.printStackTrace();
         }
     }
 
     @Test
     public final void calculatrice_divide_by_zero() {
-        // ETANT DONNE une calculatrice
-        final Calculatrice calculatrice = new Calculatrice();
+        assertThrows(ArithmeticException.class, () -> {
+            // ETANT DONNE une calculatrice
+            final Calculatrice calculatrice = new Calculatrice();
 
-        // QUAND elle divise un nombre par zéro
-        try {
-            calculatrice.div(10d, 0d);
-        } catch(Exception ex) {
+            // QUAND elle divise un nombre par zéro
             // ALORS une exception doit être levée
-            assertTrue(ex instanceof DivideByZeroException);
-        }
+            calculatrice.div(10d, 0d);
+        });
     }
 
     @Test
@@ -70,6 +69,6 @@ public final class CalculatriceTest {
         final double result = calculatrice.mul(2d, 2d);
 
         // ALORS le résultat doit être correct
-        assertTrue(result == 4d);
+        assertEquals(4d, result, 0);
     }
 }

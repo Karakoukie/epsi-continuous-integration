@@ -21,7 +21,7 @@ public final class Calculatrice
     /**
      * @param a double value
      * @param b double value
-     * @return a + b
+     * @return a - b
      */
     public final double sub(final double a, final double b) {
         return a - b;
@@ -30,13 +30,13 @@ public final class Calculatrice
     /**
      * @param a double value
      * @param b double value
-     * @return a + b
+     * @return a / b
      */
-    public final double div(final double a, final double b) throws DivideByZeroException {
+    public final double div(final double a, final double b) throws ArithmeticException {
         final double product = a / b;
 
-        if (product == 0d) {
-            throw new DivideByZeroException();
+        if (Double.isInfinite(product)) {
+            throw new ArithmeticException("Impossible de diviser par zero");
         }
 
         return product;
@@ -45,17 +45,9 @@ public final class Calculatrice
     /**
      * @param a double value
      * @param b double value
-     * @return a + b
+     * @return a * b
      */
     public final double mul(final double a, final double b) {
         return a * b;
     }
-}
-
-final class DivideByZeroException extends Exception {
-
-    public DivideByZeroException() {
-        super("Impossible de diviser par zero");
-    }
-
 }
