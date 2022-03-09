@@ -1,24 +1,20 @@
 package fr.epsi;
 
 /**
- * Hello world!
- *
+ * Calculatrice class
  */
-public class Calculatrice 
+public final class Calculatrice 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+    public Calculatrice() {
+        /* Empty constructor */
     }
-
-    public Calculatrice() {}
 
     /**
      * @param a double value
      * @param b double value
      * @return a + b
      */
-    public double add(double a, double b) {
+    public final double add(final double a, final double b) {
         return a + b;
     }
 
@@ -27,7 +23,7 @@ public class Calculatrice
      * @param b double value
      * @return a + b
      */
-    public double sub(double a, double b) {
+    public final double sub(final double a, final double b) {
         return a - b;
     }
 
@@ -36,10 +32,12 @@ public class Calculatrice
      * @param b double value
      * @return a + b
      */
-    public double div(double a, double b) throws DivideByZeroException {
-        double product = a / b;
+    public final double div(final double a, final double b) throws DivideByZeroException {
+        final double product = a / b;
 
-        if (a == 0d || b == 0d) throw new DivideByZeroException("Impossible de diviser par zero");
+        if (product == 0d) {
+            throw new DivideByZeroException();
+        }
 
         return product;
     }
@@ -49,15 +47,15 @@ public class Calculatrice
      * @param b double value
      * @return a + b
      */
-    public double mul(double a, double b) {
+    public final double mul(final double a, final double b) {
         return a * b;
     }
 }
 
-class DivideByZeroException extends Exception {
+final class DivideByZeroException extends Exception {
 
-    public DivideByZeroException(String message) {
-        super(message);
+    public DivideByZeroException() {
+        super("Impossible de diviser par zero");
     }
 
 }
